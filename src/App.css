@@ -1,3 +1,96 @@
-.app{
-    background-color: rebeccapurple;
+*{
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fafafa;
+    color: #777;
+    display: flex;
+    justify-content: center;
+}
+
+.App{
+    width: 90vw;
+}
+
+.headline-section{
+    display: flex;
+    font-size: x-large;
+    justify-content: center;
+    align-items: center;
+    color: #545454;
+    
+}
+
+p{
+    font-size: 17px;
+    font-weight:550;
+}
+
+.search-section{
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
+    width: 100%;
+    flex-direction: column;
+    padding: 5px 0px;
+    /* font-size: 16px; */
+}
+
+.surprise{
+    background-color: #d6d6f1;
+    border-radius: 5px;
+    color: #000;
+    font-weight: 550;
+    padding: 4px 12px;
+    margin: 0 0 2px 5px;
+}
+
+.inputContainer{
+    /* display: flex; */
+    justify-content: space-between;
+}
+.inputContainer{
+    width: 100%;
+    display: flex;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 82, 0.15)0 2px 5px ;
+}
+
+.inputContainer input::placeholder{
+    color: #bebdbd;
+    font-weight: 200;
+    
+}
+
+.inputContainer input{
+    border: none;
+    padding: 13px 14px;
+    box-sizing: border-box;
+    font-weight: 400;
+    font-size: larger;
+    outline: gray;
+    width: 85%;
+}
+
+.inputContainer button{
+    width: 15%;
+    border: gray;
+    border-left: 1px #bbbbbb solid;
+    background: rgb(128, 128, 128);
+    font-size: larger;
+    font-weight: 200;
+    color: rgb(249, 249, 249);
+    cursor: pointer;
+}
+
+.inputContainer button:active{
+    background: #cacaca;
+    color: #777;
 }
