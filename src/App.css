@@ -94,3 +94,16 @@ p{
     background: #cacaca;
     color: #777;
 }
+
+.image-section{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: space-between;
+}
+
+.image-section img{
+    margin: 1px;
+    flex-grow: 1;
+}
