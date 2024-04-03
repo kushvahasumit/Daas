@@ -6,12 +6,12 @@ function App() {
   const [value, setValue] = useState(null);
   const [size, setSize] = useState("");
 
-  const surpriseMe = [
-    "A blue panda eating pizza",
-    "A frog talking on phone",
-    "A superhero beaten by women",
-    "A baby flying on the sparrow",
-  ];
+  // const surpriseMe = [
+  //   "A blue panda eating pizza",
+  //   "A frog talking on phone",
+  //   "A superhero beaten by women",
+  //   "A baby flying on the sparrow",
+  // ];
 
   console.log("this is input1::", value);
   console.log("this is images1::", images);
@@ -75,7 +75,7 @@ function App() {
 
       <section className="image-section">
         {images?.map((image, index) => (
-          <img key={index} src={image.url} alt={`Image ${index}`} />
+          <img key={index} src={image.url} alt={`index of img : ${index}`} />
         ))}
       </section>
     </div>
