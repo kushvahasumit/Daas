@@ -22,7 +22,7 @@
   "scripts": {
     "start:frontend": "react-scripts start",
     "start:backend": "nodemon server.js",
-    "test": "react-scripts test",
+    "build": "react-scripts build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
