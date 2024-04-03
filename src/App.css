@@ -76,14 +76,14 @@ p{
     font-weight: 400;
     font-size: larger;
     outline: gray;
-    width: 85%;
+    width: 75%;
 }
 
 .inputContainer button{
     width: 15%;
     border: gray;
     border-left: 1px #bbbbbb solid;
-    background: rgb(128, 128, 128);
+    background: rgb(106, 104, 104);
     font-size: larger;
     font-weight: 200;
     color: rgb(249, 249, 249);
@@ -93,6 +93,15 @@ p{
 .inputContainer button:active{
     background: #cacaca;
     color: #777;
+}
+
+.sizeSection{
+    width: 10%;
+    border: gray;
+    margin-right: 6px;
+    border: none;
+    font-size: larger;
+    /* cursor: pointer; */
 }
 
 .image-section{

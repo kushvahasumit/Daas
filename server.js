@@ -29,7 +29,7 @@ app.post("/genImg",async (req,res) => {
         const response = await openai.images.generate({
           model: "dall-e-2",
           prompt: inputData,
-          n: 1,
+          n: 2,
           quality: "hd",
           size: sizeOptions,
           response_format: "url",
