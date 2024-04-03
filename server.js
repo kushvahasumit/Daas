@@ -1,28 +1,37 @@
 const express = require("express");
 const cors = require('cors')
 require("dotenv").config();
-const PORT = process.env.PORT || 3000;
+const { OpenAI } = require("openai");
 
+const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(express.json());
 app.use(cors())
-
-const { OpenAI } = require("openai");
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
 app.post("/genImg",async (req,res) => {
-    
+ const inputData = req.body.value;
+ console.log("Input received:", inputData);
+ const sizeOptions =
+   req.body.size === "small"
+     ? "256x256"
+     : req.body.size === "medium"
+     ? "512x512"
+     : req.body.size === "large"
+     ? "1024x1024"
+     : [];
+ console.log("size received:", sizeOptions);
 
     try {
         const response = await openai.images.generate({
           model: "dall-e-2",
-          prompt: req.body,
-          n: 2,
-          quality: "standard",
-          size: "1024x1024",
+          prompt: inputData,
+          n: 1,
+          quality: "hd",
+          size: sizeOptions,
           response_format: "url",
         });
 
@@ -31,7 +40,6 @@ app.post("/genImg",async (req,res) => {
           response
         );
         res.send(response.data.data)
-        // console.log(response.data[0].url)
         console.log("this is backend image",image_url)
     } catch (error) {
          if (error.response) {

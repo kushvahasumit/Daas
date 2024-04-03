@@ -5,6 +5,7 @@ import './App.css'
 function App() {
   const [images,setImages] = useState(null)
   const [value,setValue] = useState(null)
+  const [size,setSize] = useState("")
 
   const surpriseMe=[
     "A blue panda eating pizza",
@@ -15,18 +16,20 @@ function App() {
 
   console.log("this is input1::",value)
   console.log("this is images1::", images);
+  console.log("this is size choosen::",size)
 
   const getImg = async() =>{
     try {
       const option = {
-          method:"POST",
-          body:JSON.stringify({
-            message:"blugh"
-          }),
-          header:{
-            "Content-type":"application/json"
-          }
-      }
+        method: "POST",
+        body: JSON.stringify({
+          value: value,
+          size:size,
+        }),
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
       const response = await fetch('http://localhost:5000/genImg',option)
       const data = await response.json()
       console.log(data.data)
@@ -61,13 +64,12 @@ function App() {
           <button onClick={getImg}>Generate</button>
         </div>
       </section>
-      {/* <select name="size" id="size">
+      <select name="size" id="size" onChange={(e)=> setSize(e.target.value)} >
         <option value="small">small</option>
         <option value="medium">medium</option>
         <option value="large">large</option>
-      </select> */}
+      </select>
       <section className="image-section">
-        
         {images?.map((image, index) => (
           <img key={index} src={image.url} alt={`Image ${index}`} />
         ))}
