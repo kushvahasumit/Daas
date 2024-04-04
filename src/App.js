@@ -42,14 +42,13 @@ function App() {
     <div className="App">
       <section className="headline-section">
         <h2>
-          {" "}Daas Gen.ai
-          {/* <u></u>:) */}
+          <u>Daas Gen.ai</u> :)
         </h2>
       </section>
       <section className="search-section">
         <p>
-          Start with detailed description{" "}
-          <span className="surprise">Surprise Me</span>{" "}
+          Start with detailed description
+          <span className="surprise">Surprise Me</span>
         </p>
         <div className="inputContainer">
           <input
