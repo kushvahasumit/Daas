@@ -5,19 +5,31 @@ function App() {
   const [images, setImages] = useState(null);
   const [value, setValue] = useState(null);
   const [size, setSize] = useState("");
+  const [error,setError] = useState(null)
 
-  // const surpriseMe = [
-  //   "A blue panda eating pizza",
-  //   "A frog talking on phone",
-  //   "A superhero beaten by women",
-  //   "A baby flying on the sparrow",
-  // ];
+  const botherMeOption = [
+    "A blue panda eating pizza",
+    "A frog talking on phone",
+    "A superhero beaten by women",
+    "A baby flying on fish",
+  ];
+
+  const botherMe = ()=>{
+    setImages(null)
+    setError(null)
+    const pickRandom = botherMeOption[Math.floor(Math.random()*botherMeOption.length)]
+    setValue(pickRandom)
+  }
 
   console.log("this is input1::", value);
   console.log("this is images1::", images);
   console.log("this is size choosen::", size);
 
   const getImg = async () => {
+    setImages(null)
+    if(value=== null){
+      setError('Error! must have prompt in input section :( ')
+    }
     try {
       const option = {
         method: "POST",
@@ -47,8 +59,8 @@ function App() {
       </section>
       <section className="search-section">
         <p>
-          Start with detailed description
-          <span className="surprise">Surprise Me</span>
+          If you want to play with me just
+          <span className="surprise" onClick={botherMe}>Bother Me</span>
         </p>
         <div className="inputContainer">
           <input
@@ -70,8 +82,15 @@ function App() {
           </select>
           <button onClick={getImg}>Generate</button>
         </div>
+        <p className="filesUpload">
+          <span>
+            <label htmlFor="files">Upload an image</label>
+            <input type="file" id="files" accept="image/*" hidden/>
+          </span>
+        </p>
+        {error && <p>{error}</p>}
       </section>
-
+      
       <section className="image-section">
         {images?.map((image, index) => (
           <img key={index} src={image.url} alt={`index of img : ${index}`} />
