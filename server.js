@@ -1,9 +1,13 @@
 const express = require("express");
 const cors = require('cors')
 require("dotenv").config();
-const { OpenAI } = require("openai");
 const fs = require('fs')
 const multer = require('multer')
+const { OpenAI } = require("openai");
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -21,10 +25,8 @@ const storage = multer.diskStorage({
 })
 
 const upload = multer({storage:storage}).single('file')
+let filePath;
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
 
 app.post("/genImg",async (req,res) => {
  const inputData = req.body.value;
@@ -70,15 +72,32 @@ app.post("/genImg",async (req,res) => {
     }
 });
 
-app.post('/upload',(req,res)=>{
+app.post('/upload',async (req,res)=>{
        upload(req,res,(error)=>{
         if (error instanceof multer.MulterError) {
           return res.status(500).json(error)
         }else if(error){
           return res.status(500).json(error);
         }
-        console.log(req.file)
+        console.log(req.file.path)
+        filePath = req.file.path;
        })
+})
+
+app.post('/variation',async (req,res)=>{
+  try {
+        const response = await openai.images.createImageVariation(
+          fs.createReadStream(filePath),
+          "dall-e-2",
+          2,
+          "256x256"
+        );
+        
+        const image_url = response.data.data[0].url;
+        console.log("This is image u want", image_url)
+      } catch (error) {
+        console.log(error)
+      }
 })
 
 app.listen(PORT, () => console.log(`Server is running on PORT : ${PORT}`));

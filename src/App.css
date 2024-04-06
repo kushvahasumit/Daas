@@ -138,7 +138,7 @@ p{
 .model{
     position: relative;
     z-index: 100;
-    background:#fff;
+    background:#f0ecec;
     padding: 10px;
     border-radius: 10px;
     display: flex;
@@ -146,12 +146,24 @@ p{
     
 }
 
+.imageContainer{
+ margin-top: 8px;
+ /* overflow: hidden; */
+ /* height: 256px; */
+ /* width: 256px; */
+}
+
 .model button{
     width: 100%;
-    /* padding: 20%; */
+    padding: 2%;
+    margin-top: 3px;
     border: none;
     font-size: larger;
     font-weight: 400;
+    background: rgb(106, 104, 104);
+    color: rgb(249, 249, 249);
+    cursor: pointer;
+    border-radius: 10px;
 }
 
 @media (max-width : 550px){

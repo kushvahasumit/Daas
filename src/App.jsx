@@ -32,6 +32,22 @@ function App() {
    }
   }
 
+  const variations = async () => {
+     try {
+      const option = {
+        method: "POST",
+      };
+       const response=await fetch("http://localhost:5000/variation",option);
+       const data = await response.json();
+       console.log(data.data);
+       setImages(data)
+       setError(null)
+       setModelOpen(false)
+     } catch (error) {
+      console.log(error)
+     }
+  }
+
   const botherMeOption = [
     "A blue panda eating pizza",
     "A frog talking on phone",
@@ -128,6 +144,7 @@ function App() {
               setModelOpen={setModelOpen}
               setSelectImage={setSelectImage}
               selectImage={selectImage}
+              variations={variations}
             />
           </div>
         )}
