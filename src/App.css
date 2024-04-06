@@ -118,10 +118,41 @@ p{
 }
 
 .filesUpload{
-        margin: 13px 0 2px 5px;
-        cursor: pointer;
+    margin: 13px 0 2px 5px;
+    cursor: pointer;
 }
 
+.overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 82, 0.15);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.model{
+    position: relative;
+    z-index: 100;
+    background:#fff;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.model button{
+    width: 100%;
+    /* padding: 20%; */
+    border: none;
+    font-size: larger;
+    font-weight: 400;
+}
 
 @media (max-width : 550px){
     .image-section img {

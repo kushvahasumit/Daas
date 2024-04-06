@@ -2,11 +2,25 @@ const express = require("express");
 const cors = require('cors')
 require("dotenv").config();
 const { OpenAI } = require("openai");
+const fs = require('fs')
+const multer = require('multer')
 
 const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(express.json());
 app.use(cors())
+
+const storage = multer.diskStorage({
+  destination : (req,res,cb) => {
+    cb(null, 'images')
+  },
+  filename : (req, file, cb)=>{
+    console.log('file',file)
+    cb(null,Date.now() + "-" + file.originalname)
+  }
+})
+
+const upload = multer({storage:storage}).single('file')
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -56,5 +70,15 @@ app.post("/genImg",async (req,res) => {
     }
 });
 
+app.post('/upload',(req,res)=>{
+       upload(req,res,(error)=>{
+        if (error instanceof multer.MulterError) {
+          return res.status(500).json(error)
+        }else if(error){
+          return res.status(500).json(error);
+        }
+        console.log(req.file)
+       })
+})
 
 app.listen(PORT, () => console.log(`Server is running on PORT : ${PORT}`));

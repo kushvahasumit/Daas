@@ -1,11 +1,36 @@
 import { useState } from "react";
 import "./App.css";
+import Model from './component/Model'
 
 function App() {
   const [images, setImages] = useState(null);
   const [value, setValue] = useState(null);
   const [size, setSize] = useState("");
   const [error,setError] = useState(null)
+  const [selectImage,setSelectImage] = useState(null)
+  const [modelOpen,setModelOpen] = useState(false)
+  
+  const uploadImage = async (e)=>{
+   console.log(e.target.files[0])
+
+   const formData = new FormData()
+   formData.append('file', e.target.files[0])
+   setModelOpen(true)
+   setSelectImage(e.target.files[0])
+   
+
+   try {
+    const option = {
+      method: "POST",
+      body: formData,
+    };
+    const response = await fetch("http://localhost:5000/upload", option);
+    const data = await response.json();
+    console.log(data.data);
+   } catch (error) {
+     console.log(error)
+   }
+  }
 
   const botherMeOption = [
     "A blue panda eating pizza",
@@ -60,7 +85,9 @@ function App() {
       <section className="search-section">
         <p>
           If you want to play with me just
-          <span className="surprise" onClick={botherMe}>Bother Me</span>
+          <span className="surprise" onClick={botherMe}>
+            Bother Me
+          </span>
         </p>
         <div className="inputContainer">
           <input
@@ -84,13 +111,28 @@ function App() {
         </div>
         <p className="filesUpload">
           <span>
-            <label htmlFor="files">Upload an image</label>
-            <input type="file" id="files" accept="image/*" hidden/>
+            <label htmlFor="files">Click me to upload an image</label>
+            <input
+              onChange={uploadImage}
+              type="file"
+              id="files"
+              accept="image/*"
+              hidden
+            />
           </span>
         </p>
         {error && <p>{error}</p>}
+        {modelOpen && (
+          <div className="overlay">
+            <Model
+              setModelOpen={setModelOpen}
+              setSelectImage={setSelectImage}
+              selectImage={selectImage}
+            />
+          </div>
+        )}
       </section>
-      
+
       <section className="image-section">
         {images?.map((image, index) => (
           <img key={index} src={image.url} alt={`index of img : ${index}`} />
