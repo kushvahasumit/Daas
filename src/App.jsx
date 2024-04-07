@@ -5,7 +5,7 @@ import Model from './component/Model'
 function App() {
   const [images, setImages] = useState(null);
   const [value, setValue] = useState(null);
-  const [size, setSize] = useState("");
+  const [size, setSize] = useState("small");
   const [error,setError] = useState(null)
   const [selectImage,setSelectImage] = useState(null)
   const [modelOpen,setModelOpen] = useState(false)
