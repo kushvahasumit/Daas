@@ -12,10 +12,12 @@ export default function Model({ setModelOpen, setSelectImage, selectImage, varia
 
   const generateUplaodedmage = () => {
     // if(refUse.current.width === 256 && refUse.current.height === 256){
+    //   variations();
     // }else{
     //   setError("Size Error: Choose 256x256 image ")
     // }
-    variations();
+      variations();
+    
   };
 
   return (
@@ -32,7 +34,7 @@ export default function Model({ setModelOpen, setSelectImage, selectImage, varia
           )}
         </div>
       </div>
-      <p>{error || "Image size must be 256x256"}</p>
+      <p>{error || "* Image size must be 256x256"}</p>
       {!error && <button onClick={generateUplaodedmage}>Generate</button>}
       {error && <button onClick={closeModel}>Close this & Try again</button>}
     </div>

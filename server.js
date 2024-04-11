@@ -3,6 +3,7 @@ const cors = require('cors')
 require("dotenv").config();
 const fs = require('fs')
 const multer = require('multer')
+const app = express();
 const { OpenAI } = require("openai");
 
 const openai = new OpenAI({
@@ -10,7 +11,7 @@ const openai = new OpenAI({
 });
 
 const PORT = process.env.PORT || 3000;
-const app = express();
+
 app.use(express.json());
 app.use(cors())
 
@@ -87,7 +88,7 @@ app.post('/upload',async (req,res)=>{
 app.post('/variation',async (req,res)=>{
   try {
         const response = await openai.images.createImageVariation(
-          fs.createReadStream(filePath),
+          fs.createReadStream(req.filePath),
           "dall-e-2",
           2,
           "256x256"
